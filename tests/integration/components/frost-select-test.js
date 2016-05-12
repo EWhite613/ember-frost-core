@@ -1,13 +1,20 @@
-import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
-import {beforeEach} from 'mocha'
+import {
+  expect
+} from 'chai'
+import {
+  describeComponent,
+  it
+} from 'ember-mocha'
+import {
+  beforeEach
+} from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
 import $ from 'jquery'
 import _ from 'lodash'
 import Ember from 'ember'
 
-const testTemplate = hbs`{{frost-select
+const testTemplate = hbs `{{frost-select
   data=data
   greeting=greeting
   onChange=onChange
@@ -23,7 +30,7 @@ const keyCodes = {
   tab: 9
 }
 
-function keyDown ($selection, keyCode) {
+function keyDown($selection, keyCode) {
   if (_.isString(keyCode)) {
     keyCode = keyCodes[keyCode]
   }
@@ -33,7 +40,7 @@ function keyDown ($selection, keyCode) {
   $selection.trigger(event)
 }
 
-function keyUp ($selection, keyCode) {
+function keyUp($selection, keyCode) {
   if (_.isString(keyCode)) {
     keyCode = keyCodes[keyCode]
   }
@@ -45,33 +52,28 @@ function keyUp ($selection, keyCode) {
 
 describeComponent(
   'frost-select',
-  'Integration: FrostSelectComponent',
-  {
+  'Integration: FrostSelectComponent', {
     integration: true
   },
-  function () {
+  function() {
     let props
     let dropDown
 
-    beforeEach(function () {
+    beforeEach(function() {
       props = {
         selected: 1,
         onChange: sinon.spy(),
         placeholder: 'Select something already',
-        data: [
-          {
-            value: 'Lex Diamond',
-            label: 'Raekwon'
-          },
-          {
-            value: 'Johnny Blaze',
-            label: 'Method Man'
-          },
-          {
-            value: 'Tony Starks',
-            label: 'Ghostface'
-          }
-        ],
+        data: [{
+          value: 'Lex Diamond',
+          label: 'Raekwon'
+        }, {
+          value: 'Johnny Blaze',
+          label: 'Method Man'
+        }, {
+          value: 'Tony Starks',
+          label: 'Ghostface'
+        }],
         greeting: 'Hola'
       }
       this.setProperties(props)
@@ -79,11 +81,11 @@ describeComponent(
       dropDown = this.$('.frost-select')
     })
 
-    it('renders', function () {
+    it('renders', function() {
       expect(this.$('.frost-select')).to.have.length(1)
     })
 
-    it('lists all passed data records', function () {
+    it('lists all passed data records', function() {
       Ember.run.later(() => {
         expect(this.$('.frost-select li').length).to.eql(props.data.length)
       })
@@ -115,7 +117,7 @@ describeComponent(
       })
     })*/
 
-    it('highlights list items on mouse over', function (done) {
+    it('highlights list items on mouse over', function(done) {
       this.$('.frost-select').click()
       let listItem = this.$('.frost-select li:first-child')
       listItem.mouseover()
@@ -128,7 +130,7 @@ describeComponent(
       })
     })
 
-    it('highlights list items when down-arrowed to', function (done) {
+    it('highlights list items when down-arrowed to', function(done) {
       let dropDown = this.$('.frost-select')
       keyUp(dropDown, 'down')
       Ember.run.later(() => {
@@ -138,7 +140,7 @@ describeComponent(
       })
     })
 
-    it('highlights list items when up-arrowed to', function (done) {
+    it('highlights list items when up-arrowed to', function(done) {
       let dropDown = this.$('.frost-select')
 
       keyUp(dropDown, 'down')
@@ -158,7 +160,7 @@ describeComponent(
       })
     })
 
-    it('closes when esc is pressed', function () {
+    it('closes when esc is pressed', function() {
       let dropDown = this.$('.frost-select')
 
       dropDown.click()
@@ -174,19 +176,29 @@ describeComponent(
       expect(dropDown)
     })
 
-    it('selects the hovered item when enter is pressed', function (done) {
+    it('selects the hovered item when enter is pressed', function(done) {
       keyUp(dropDown, 40)
       keyUp(dropDown, 13)
 
       Ember.run.later(() => {
+        console.log(document.getElementsByClassName('frost-select'))
+
         let dropDownInput = this.$('.frost-select input')
         let value = dropDownInput.val()
         expect(value).to.eql(props.data[0].label)
         done()
+        try {
+          html2canvas(document.getElementById('ember-testing-container')).then(function(canvas) {
+            var image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+            window.location.href = image
+          })
+        } catch (error) {
+          console.log(error)
+        }
       })
     })
 
-    it('selects the hovered item when it is clicked', function (done) {
+    it('selects the hovered item when it is clicked', function(done) {
       let listItem = this.$('.frost-select li:first-child')
       listItem.click()
       Ember.run.later(() => {
@@ -196,10 +208,12 @@ describeComponent(
       })
     })
 
-    it('filters the list when input is typed into', function (done) {
+    it('filters the list when input is typed into', function(done) {
       let input = this.$('.frost-select input')
       input.val('w')
-      input[0].oninput({target: input[0]})
+      input[0].oninput({
+        target: input[0]
+      })
       Ember.run.later(() => {
         let listItems = this.$('.frost-select li')
         expect(listItems.length).to.eql(1)
@@ -207,10 +221,12 @@ describeComponent(
       })
     })
 
-    it('hovers the only available one if filter leaves one', function (done) {
+    it('hovers the only available one if filter leaves one', function(done) {
       let input = this.$('.frost-select input')
       input.val('w')
-      input[0].oninput({target: input[0]})
+      input[0].oninput({
+        target: input[0]
+      })
       Ember.run.later(() => {
         let listItems = this.$('.frost-select li')
         expect(listItems.length).to.eql(1)
@@ -219,7 +235,7 @@ describeComponent(
       })
     })
 
-    it('calls the supplied callback when an item is selected', function (done) {
+    it('calls the supplied callback when an item is selected', function(done) {
       let listItem = this.$('.frost-select li:first-child')
       listItem.click()
       Ember.run.later(() => {
@@ -228,7 +244,7 @@ describeComponent(
       })
     })
 
-    it('goes into error state when something non-existant is typed', function (done) {
+    it('goes into error state when something non-existant is typed', function(done) {
       let input = this.$('.frost-select input')
       this.$('.frost-select').addClass('open')
       input.val('zxcv').trigger('input')
@@ -241,12 +257,12 @@ describeComponent(
       })
     })
 
-    it('respects a pre-selected value', function () {
+    it('respects a pre-selected value', function() {
       let component = this.$('.frost-select .selected')
       expect(component.length).to.eql(1)
     })
 
-    it('sets the prompt to the selected value when the drop down list is closed', function (done) {
+    it('sets the prompt to the selected value when the drop down list is closed', function(done) {
       let input = this.$('.frost-select input')
       keyUp(dropDown, 'down')
       keyUp(dropDown, 13) // Enter key, select the item
@@ -266,7 +282,7 @@ describeComponent(
       })
     })
 
-    it('sets the prompt and value from a component attribute', function (done) {
+    it('sets the prompt and value from a component attribute', function(done) {
       this.set('selVal', 'Tony Starks')
 
       Ember.run.later(() => {
@@ -278,7 +294,7 @@ describeComponent(
       })
     })
 
-    it('handles click outside of select', function (done) {
+    it('handles click outside of select', function(done) {
       this.$('.frost-select .down-arrow').click()
       Ember.run.later(() => {
         this.$().click()
@@ -289,7 +305,7 @@ describeComponent(
       })
     })
 
-    it('handles loosing focus by pressing tab', function (done) {
+    it('handles loosing focus by pressing tab', function(done) {
       this.$('.frost-select .down-arrow').click()
       Ember.run.later(() => {
         keyDown(dropDown, 'tab')
@@ -300,7 +316,7 @@ describeComponent(
       })
     })
 
-    it('supports placeholder', function () {
+    it('supports placeholder', function() {
       const $input = this.$('.frost-select input')
       expect($input.attr('placeholder')).to.eql('Select something already')
     })

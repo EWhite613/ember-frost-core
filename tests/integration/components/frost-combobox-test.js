@@ -38,6 +38,7 @@ describeComponent(
       this.setProperties(props)
 
       this.render(testTemplate)
+      
       dropDown = this.$('> div')
     })
 

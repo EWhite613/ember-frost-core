@@ -30,10 +30,11 @@ module.exports = {
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Regular.woff2'), { destDir: 'assets/fonts' })
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'stylesheet.css'))
     }
-
+    app.import(path.join('vendor', 'html2canvas.js'))
     if (typeof app.import === 'function') {
       app.import(app.bowerDirectory + '/perfect-scrollbar/js/perfect-scrollbar.js')
       app.import(app.bowerDirectory + '/perfect-scrollbar/css/perfect-scrollbar.css')
+      app.import(app.bowerDirectory + '/resemblejs/resemble.js')
     }
   },
 

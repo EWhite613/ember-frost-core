@@ -1,24 +1,42 @@
 const expect = chai.expect
-const {run} = Ember
-import {describeComponent} from 'ember-mocha'
-import {beforeEach, describe, it} from 'mocha'
+const {
+  run
+} = Ember
+import {
+  describeComponent
+} from 'ember-mocha'
+import {
+  beforeEach,
+  describe,
+  it,
+  afterEach
+} from 'mocha'
+
 
 describeComponent(
   'frost-checkbox',
-  'FrostCheckboxComponent',
-  {},
-  function () {
+  'FrostCheckboxComponent', {},
+  function() {
     let component
 
-    beforeEach(function () {
+    beforeEach(function() {
       component = this.subject()
     })
-
-    it('sets dependent keys correctly', function () {
+    afterEach(function() {
+      // console.log(document.body)
+      // try {
+      //     html2canvas(document.body).then(function(canvas) {
+      //       var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      //       window.location.href = image
+      //     })
+      //   } catch (error) {
+      //     console.log(error)
+      //   }
+    })
+    it('sets dependent keys correctly', function() {
       const isCheckedDependentKeys = [
-        'checked'
-      ]
-
+          'checked'
+        ]
       const sizeClassDependentKeys = [
         'size'
       ]
@@ -43,18 +61,23 @@ describeComponent(
       ).to.eql(inputIdDependentKeys)
     })
 
-    it('defaults state to unchecked', function () {
+    it('defaults state to unchecked', function() {
       expect(component.get('isChecked')).to.equal(false)
     })
 
-    describe('isChecked', function () {
-      [
-        {in: undefined, out: false},
-        {in: null, out: false},
-        {in: false, out: false},
-        {in: true, out: true}
-      ].forEach((test) => {
-        it(`returns ${test.out} when checked is ${test.in}`, function () {
+    describe('isChecked', function() {
+      [{ in : undefined,
+        out: false
+      }, { in : null,
+        out: false
+      }, { in : false,
+        out: false
+      }, { in : true,
+        out: true
+      }].forEach((test) => {
+
+
+        it(`returns ${test.out} when checked is ${test.in}`, function() {
           run(() => {
             component.set('checked', test.in)
           })
@@ -63,15 +86,15 @@ describeComponent(
       })
     })
 
-    describe('when onBlur property is omitted', function () {
-      beforeEach(function () {
+    describe('when onBlur property is omitted', function() {
+      beforeEach(function() {
         run(() => {
           component.set('onBlur', undefined)
         })
       })
 
-      it('does not throw an error when onBlur action is triggered', function () {
-        expect(function () {
+      it('does not throw an error when onBlur action is triggered', function() {
+        expect(function() {
           component.get('actions.onBlur').call(component)
         }).not.to.throw(Error)
       })

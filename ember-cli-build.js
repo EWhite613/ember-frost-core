@@ -18,6 +18,7 @@ module.exports = function (defaults) {
 
   app.import('bower_components/sinonjs/sinon.js')
   app.import('bower_components/highlightjs/styles/github.css')
+  app.import('vendor/html2canvas.js')
   /*
     This build file specifes the options for the dummy test app of this
     addon, located in `/tests/dummy`
