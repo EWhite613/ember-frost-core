@@ -10,6 +10,6 @@ export default function () {
       data: db.nodes
     }
   })
-
+  this.passthrough('http://localhost:4500/**')
   this.passthrough()
 }
