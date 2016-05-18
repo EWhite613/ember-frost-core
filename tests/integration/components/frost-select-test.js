@@ -1,4 +1,5 @@
 import {
+  assert,
   expect
 } from 'chai'
 import {
@@ -187,8 +188,14 @@ describeComponent(
         let dropDownInput = this.$('.frost-select input')
         let value = dropDownInput.val()
         expect(value).to.eql(props.data[0].label)
-        visualAcceptance('Boston', null, null, 0.00)
-        done()
+        visualAcceptance('Boston', null, null, 0.00).then(function (data) {
+          assert.notProperty(data, 'message')
+          done()
+        }).catch(function (err) {
+          console.log('Error')
+          done(err)
+        })
+
       })
     })
 
