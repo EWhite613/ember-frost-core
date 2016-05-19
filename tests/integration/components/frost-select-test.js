@@ -189,13 +189,11 @@ describeComponent(
         let value = dropDownInput.val()
         expect(value).to.eql(props.data[0].label)
         visualAcceptance('Boston', null, null, 0.00).then(function (data) {
-          // assert.notProperty(data, 'message')
+          console.log(arguments)
           done()
         }).catch(function (err) {
-          console.log('Error')
           done(err)
         })
-
       })
     })
 
@@ -218,7 +216,13 @@ describeComponent(
       Ember.run.later(() => {
         let listItems = this.$('.frost-select li')
         expect(listItems.length).to.eql(1)
-        done()
+        visualAcceptance('Filter', null, null, 0.00).then(function (data) {
+          console.log(arguments)
+          done()
+        }).catch(function (err) {
+          done(err)
+        })
+          // done()
       })
     })
 
