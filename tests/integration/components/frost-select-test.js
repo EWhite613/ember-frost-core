@@ -1,5 +1,4 @@
 import {
-  assert,
   expect
 } from 'chai'
 import {
@@ -324,5 +323,6 @@ describeComponent(
     it('supports placeholder', function () {
       const $input = this.$('.frost-select input')
       expect($input.attr('placeholder')).to.eql('Select something already')
+      return visualAcceptance('placeholder', null, null, 0.00)
     })
   })
