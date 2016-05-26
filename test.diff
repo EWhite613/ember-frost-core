@@ -1,0 +1,20 @@
+--- /var/folders/tt/7p924nk173lcbdhj1h47f7sjb8ys48/T/pk2GRa_generate-components.js	2016-05-24 10:06:32.000000000 -0400
++++ /var/folders/tt/7p924nk173lcbdhj1h47f7sjb8ys48/T/PlWMQa_generate-components.js	2016-05-24 10:06:32.000000000 -0400
+@@ -135,8 +135,15 @@
+  * @param {string} demoLocation - Used for multiple demos. Name of the component (ex 'button')
+  */
+ function getDemoRouting (url, routingConfig, demoParentDirectory, demoLocation) {
+-  let demoRoutingString = fs.readFileSync(url, 'utf8')
+-  let demoRouting = requireFromString(demoRoutingString)
++  let demoRoutingString, demoRouting
++  try {
++     demoRoutingString = fs.readFileSync(url, 'utf8')
++     demoRouting = requireFromString(demoRoutingString)
++  } catch(err){
++    console.log(chalk.red.bold(err))
++    return
++  }
++
+   if (demoRouting.length === 0) {
+     return
+   }

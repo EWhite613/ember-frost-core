@@ -14,10 +14,12 @@
     "marked": "^0.3.5",
     "highlightjs": "^9.2.0",
     "d3": "^3.5.17",
+    "detectjs": "*",
     "resemblejs": "^2.2.0"
   },
   "resolutions": {
-    "ember": "~2.3.0"
+    "ember": "~2.3.0",
+    "chai": "~2.3.0"
   },
   "devDependencies": {
     "blanket": "5e94fc30f2e694bb5c3718ddcbf60d467f4b4d26"

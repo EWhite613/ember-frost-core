@@ -1,4 +1,4 @@
-/* global visit, andThen, currentPath */
+/* global visit, andThen, currentPath, capture */
 
 import {
   describe,
@@ -26,6 +26,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('demo')
+      return capture('Acceptance', null, null, 0.00)
     })
   })
   it('can visit /palette', function () {
@@ -72,7 +73,6 @@ describe('Acceptance: Application', function () {
   })
   it('can visit /field', function () {
     visit('/field')
-
     andThen(function () {
       expect(currentPath()).to.equal('field')
     })

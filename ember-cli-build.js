@@ -13,6 +13,9 @@ module.exports = function (defaults) {
       includePaths: [
         'addon/styles'
       ]
+    },
+    'ember-cli-visual-acceptance': {
+      imageDirectory: 'visual-acceptance'
     }
   })
 

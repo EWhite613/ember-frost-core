@@ -1,14 +1,7 @@
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-function takeScreenshot() {
-  if (window.callPhantom) {
-    var date = new Date()
-    var filename = "target/screenshots/" + date.getTime()
-    console.log("Taking screenshot " + filename)
-    callPhantom({'screenshot': filename})
-  }
-}
+
 
 describeComponent(
   'frost-button',

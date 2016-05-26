@@ -13,7 +13,6 @@ import hbs from 'htmlbars-inline-precompile'
 import $ from 'jquery'
 import _ from 'lodash'
 import Ember from 'ember'
-import visualAcceptance from 'ember-cli-visual-acceptance/VisualAcceptance'
 // var fs = require('fs')
 const testTemplate = hbs `{{frost-select
   data=data
@@ -23,7 +22,7 @@ const testTemplate = hbs `{{frost-select
   selected=selected
   selectedValue=selVal
 }}`
-
+/* global capture */
 
 const keyCodes = {
   'up': 38,
@@ -81,7 +80,6 @@ describeComponent(
       this.setProperties(props)
       this.render(testTemplate)
       dropDown = this.$('.frost-select')
-
     })
 
     it('renders', function () {
@@ -187,7 +185,7 @@ describeComponent(
         let dropDownInput = this.$('.frost-select input')
         let value = dropDownInput.val()
         expect(value).to.eql(props.data[0].label)
-        visualAcceptance('Boston', null, null, 0.00).then(function (data) {
+        capture('Boston', 1920, 1080, 0.00).then(function (data) {
           console.log(arguments)
           done()
         }).catch(function (err) {
@@ -215,7 +213,7 @@ describeComponent(
       Ember.run.later(() => {
         let listItems = this.$('.frost-select li')
         expect(listItems.length).to.eql(1)
-        visualAcceptance('Filter', null, null, 0.00).then(function (data) {
+        capture('Filter', null, null, 0.00).then(function (data) {
           console.log(arguments)
           done()
         }).catch(function (err) {
@@ -323,6 +321,6 @@ describeComponent(
     it('supports placeholder', function () {
       const $input = this.$('.frost-select input')
       expect($input.attr('placeholder')).to.eql('Select something already')
-      return visualAcceptance('placeholder', null, null, 0.00)
+      return capture('placeholder', null, null, 0.00)
     })
   })
