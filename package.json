@@ -34,6 +34,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "ember-cli-visual-acceptance": "*",
     "broccoli-asset-rev": "^2.5.0",
     "chai-jquery": "^2.0.0",
     "ember-browserify": "^1.1.13",

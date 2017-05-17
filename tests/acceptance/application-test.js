@@ -1,3 +1,4 @@
+/*global capture */
 import {expect} from 'chai'
 import {after, before, beforeEach, describe, it} from 'mocha'
 
@@ -53,8 +54,9 @@ describe('Acceptance: Application', function () {
           return visit(`/${path}`)
         })
 
-        it('renders correct route', function () {
+        it('renders correct route', function (done) {
           expect(currentPath()).to.equal(path)
+          capture('path', done, {width: 1920, height: 1080})
         })
       })
     })
