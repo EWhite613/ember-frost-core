@@ -1,4 +1,4 @@
-/*global capture */
+/*global capture,$ */
 import {expect} from 'chai'
 import {after, before, beforeEach, describe, it} from 'mocha'
 
@@ -50,13 +50,19 @@ describe('Acceptance: Application', function () {
   ]
     .forEach((path) => {
       describe(`visit /${path}`, function () {
+        this.timeout(60000)
         beforeEach(function () {
           return visit(`/${path}`)
         })
 
         it('renders correct route', function (done) {
           expect(currentPath()).to.equal(path)
-          capture('path', done, {width: 1920, height: 1080})
+          // if (path === 'icons'){
+          //   debugger;
+          // }
+          var element = document.getElementById('ember-testing')
+          capture(path, done, {width: element.scrollWidth,
+            height: element.scrollHeight, experimentalSvgs: true})
         })
       })
     })
