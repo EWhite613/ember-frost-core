@@ -50,7 +50,7 @@ describe('Acceptance: Application', function () {
   ]
     .forEach((path) => {
       describe(`visit /${path}`, function () {
-        this.timeout(60000)
+        this.timeout(90000)
         beforeEach(function () {
           return visit(`/${path}`)
         })
@@ -61,8 +61,10 @@ describe('Acceptance: Application', function () {
           //   debugger;
           // }
           var element = document.getElementById('ember-testing')
-          capture(path, done, {width: element.scrollWidth,
-            height: element.scrollHeight, experimentalSvgs: true})
+          capture(path, done, {
+            width: element.scrollWidth,
+            height: element.scrollHeight, experimentalSvgs: true
+          })
         })
       })
     })
