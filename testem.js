@@ -4,10 +4,10 @@ module.exports = {
   disable_watching: true,
   framework: 'mocha',
   'launch_in_ci': [
-    'NightmareJsVisualAcceptance'
+    'Electron'
   ],
   'launch_in_dev': [
-    'Firefox'
+    'Electron'
   ],
 
   'launchers': {
@@ -21,6 +21,10 @@ module.exports = {
     },
     'NightmareJsVisualAcceptance': {
       'command': 'DEBUG=nightmare* node vendor/nightmarejs-launcher.js <url>',
+      'protocol': 'browser'
+    },
+    'Electron': {
+      'command': 'electron vendor/electron-launcher.js <url>',
       'protocol': 'browser'
     }
   },
