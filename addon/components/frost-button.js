@@ -216,7 +216,7 @@ export default Component.extend({
     }
 
     if (this.onClick && !this.get('disabled')) {
-      this.onClick(this.get('id'))
+      this.onClick(this.get('elementId'), event)
     }
   }),
 
